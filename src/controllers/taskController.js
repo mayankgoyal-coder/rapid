@@ -48,16 +48,15 @@ const getTaskByQuery = async (req, res) => {
         if (!isValid(description))
             return res.status(400).send({ status: false, message: "description Should be valid ..." })
      
-            if (!isValid(owner))
-            return res.status(400).send({ status: false, message: "owner Should be valid ..." })
-        if (!isValidObjectId(owner)) {
-            return res.status(404).send({ status: false, msg: "Invalid UserId" });
-        }
-        let getData = await taskModel.findOne(data) //.populate('User').exec(function (err, story) {
-        //     if (err)
-        //      return handleError(err);
-        //     console.log('maza aa gya');
-        //   });
+            // if (!isValid(owner))
+        //     // return res.status(400).send({ status: false, message: "owner Should be valid ..." })
+        // if (!isValidObjectId(owner)) {
+        //     return res.status(404).send({ status: false, msg: "Invalid UserId" });
+        // }
+        // let getData = await taskModel.find()
+        // .populate(user)
+        // .then(p=>console.log(p))
+        // .catch(error=>console.log(error));
         return res.status(200).send({ status: true, message: "Get Task", data: getData })
     } catch (err) {
         return res.status(500).send({ status: false, Error: err.message })

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const multer = require("multer")
 const userModel = require("../models/userModel")
+const{sendEmail} = require("../email/account.js")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
@@ -53,6 +54,7 @@ const userCreate = async (req, res) => {
     
 
         const userCreated = await userModel.create(requestBody)
+        sendEmail(requestBody.email,requestBody.name)
         return res.status(200).send({ status: true, message: "User Created Successfully ", data: userCreated })
          
     } catch (err) {
@@ -61,6 +63,29 @@ const userCreate = async (req, res) => {
     }
 }
 //#########################################################################################################################
+
+// const uploadProfile = async(req,res)=>{
+// try{
+//     var storage = multer.diskStorage({
+//         destination: function (req, file, cb) {
+      
+//             // Uploads is the Upload_folder_name
+//             cb(null, "uploads")
+//         },
+//         filename: function (req, file, cb) {
+//           cb(null, file.fieldname + "-" + Date.now()+".jpg")
+//         }
+//       })
+// }
+// catch(err){
+//     console.log(err)
+//        return res.status(500).send({ Error: err.message })
+// }
+// }
+
+//############################################################################################################################
+
+
 const userLogin = async function (req, res) {
     try {
         const requestBody = req.body

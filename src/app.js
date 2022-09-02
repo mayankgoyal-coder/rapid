@@ -1,6 +1,8 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser");
+const multer = require("multer")
+
 require("dotenv").config()
 const port = process.env.PORT || 3000
 const route = require("./routes/route")
@@ -18,6 +20,21 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 
 app.use("/",route)
+
+// const upload = multer({
+//     dest: "images",
+//     limits: {
+//         fileSize: 1000000
+//     }
+// });
+
+// app.post("/upload", upload.single("upload"), function(req, res) {
+//     res.status(200).send({ status: true, msg: "Successfully Uploaded!" });
+//     return
+// });
+
+
+
 
 app.listen(port,()=>{
     console.log(`Server is running on the port ${(process.env.port || 8000)}`)
