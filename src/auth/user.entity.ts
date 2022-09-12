@@ -9,13 +9,16 @@ export class User {
   @Column({ unique: true })
   username: string;
 
-  @Column({unique:true})
+  @Column({ unique: true })
   mobile: string;
 
-  @Column({unique:true})
+  @Column({ unique: true })
   email: string;
 
   @Column()
   password: string;
+
+  @OneToMany((_type) => Task, (task) => task.user, { eager: true })
+  tasks: Task[];
 
 }
